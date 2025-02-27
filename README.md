@@ -30,7 +30,7 @@ Installing VSCode can be challenging on some Linux distributions. If you encount
 - https://hub.docker.com/r/hemashushu/archlinux-gui-firefox
 - https://hub.docker.com/r/hemashushu/archlinux-gui-mpv
 - https://hub.docker.com/r/hemashushu/archlinux-gui-devel
-- https://hub.docker.com/r/hemashushu/archlinux-gui-vscode
+- https://hub.docker.com/r/hemashushu/archlinux-gui-vscode-oss
 
 ## Repositories
 
