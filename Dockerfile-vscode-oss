@@ -1,0 +1,15 @@
+FROM archlinux-gui-devel:1.0.0
+
+# Update repository and system.
+RUN pacman -Syu --noconfirm
+
+# Install VSCode.
+RUN pacman -S ttf-jetbrains-mono code --noconfirm
+
+COPY asset/start-and-wait-vscode.sh /root/start-and-wait-vscode.sh
+
+RUN chmod +x /root/start-and-wait-vscode.sh
+
+# Start vscode
+# CMD dbus-run-session code --no-sandbox
+CMD /root/start-and-wait-vscode.sh
