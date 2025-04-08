@@ -1,10 +1,10 @@
-FROM archlinux-gui-devel:1.0.0
+FROM archlinux-gui-devel:1.1.0
 
 # Update repository and system.
 RUN pacman -Syu --noconfirm
 
-# Install VSCode.
-RUN pacman -S ttf-jetbrains-mono code --noconfirm
+# Install Monospace fonts and VSCode.
+RUN pacman -S ttf-jetbrains-mono ttf-0xproto-nerd code --noconfirm
 
 COPY asset/start-and-wait-vscode.sh /root/start-and-wait-vscode.sh
 

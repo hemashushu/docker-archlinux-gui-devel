@@ -1,4 +1,4 @@
-FROM archlinux-gui:1.0.0
+FROM archlinux-gui:1.1.0
 
 # Update repository and system.
 RUN pacman -Syu --noconfirm
@@ -13,7 +13,10 @@ RUN pacman -S ninja cmake musl clang lld valgrind gdb --noconfirm
 RUN pacman -S bash-completion wget vim git openssh --noconfirm
 
 # Install common programming languages (modify as needed).
-RUN pacman -S rustup go nodejs npm jdk-openjdk maven python python-pipx --noconfirm
+RUN pacman -S rustup go nodejs npm jdk-openjdk maven gradle python python-pipx --noconfirm
+
+# Install TypeScript
+RUN npm install -g typescript
 
 # (Optional) Set Rustup local mirror.
 RUN echo "export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup" >> /root/.bashrc && \
