@@ -1,4 +1,4 @@
-FROM archlinux-gui:1.1.0
+FROM archlinux-gui:1.2.0
 
 # Update repository and system.
 RUN pacman -Syu --noconfirm
@@ -67,11 +67,11 @@ RUN sed -i 's/#Port 22/Port 3333/' /etc/ssh/sshd_config
 EXPOSE 3333
 
 # Set $PATH and your favorite profile.
-RUN echo 'export PATH=$PATH:/root/.local/bin:/root/.cargo/bin:/root/go/bin' >> /root/.bashrc && \
+RUN echo 'export PATH=$PATH:/root/.local/bin:/root/.cargo/bin:/root/go/bin:/root/.npm-packages/bin' >> /root/.bashrc && \
     echo 'alias ls="ls --color=auto"' >> /root/.bashrc
 
 # Change the permission of XDG_RUNTIME_DIR.
-RUN chmod 700 /tmp
+# RUN chmod 700 /tmp
 
 # Change the work directory.
 WORKDIR /root

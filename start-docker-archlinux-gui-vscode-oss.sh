@@ -19,13 +19,14 @@ xauth nlist ${DISPLAY} | sed -e 's/^..../ffff/' | uniq | xauth -f ${X11AUTHORITY
 
 # Application data folders
 # ------------------------
-GUI_APP_DATA_FOLDER="${HOME}/docker-gui-app-data"
+GUI_APP_DATA_FOLDER="${HOME}/docker-archlinux-gui-app-data"
 mkdir -p ${GUI_APP_DATA_FOLDER}/.local
 mkdir -p ${GUI_APP_DATA_FOLDER}/.config
 mkdir -p ${GUI_APP_DATA_FOLDER}/.cache
 mkdir -p ${GUI_APP_DATA_FOLDER}/.rustup
 mkdir -p ${GUI_APP_DATA_FOLDER}/.cargo
 mkdir -p ${GUI_APP_DATA_FOLDER}/.m2
+mkdir -p ${GUI_APP_DATA_FOLDER}/.npm-packages
 mkdir -p ${GUI_APP_DATA_FOLDER}/go
 
 # VSCode data folder
@@ -55,6 +56,7 @@ docker run \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.rustup",target="/root/.rustup" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.cargo",target="/root/.cargo" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.m2",target="/root/.m2" \
+  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.npm-packages",target="/root/.npm-packages" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/go",target="/root/go" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.vscode-oss",target="/root/.vscode-oss" \
   --mount type=bind,source="${HOME}/projects",target="/root/projects" \
@@ -78,4 +80,4 @@ docker run \
   --device /dev/snd \
   --network host \
   --cap-add=NET_RAW \
-  archlinux-gui-vscode-oss:1.1.0
+  archlinux-gui-vscode-oss:1.2.0

@@ -36,3 +36,4 @@ Installing VSCode can be challenging on some Linux distributions. If you encount
 
 - [docker-archlinux-gui](https://github.com/hemashushu/docker-archlinux-gui)
 - [docker-archlinux-gui-devel](https://github.com/hemashushu/docker-archlinux-gui-devel)
+- [docker-ubuntu-gui-devel](https://github.com/hemashushu/docker-ubuntu-gui-devel)
