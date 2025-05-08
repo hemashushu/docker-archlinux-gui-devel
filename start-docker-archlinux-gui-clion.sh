@@ -72,6 +72,7 @@ mkdir -p ${GUI_APP_DATA_FOLDER}/.cargo
 mkdir -p ${GUI_APP_DATA_FOLDER}/.m2
 mkdir -p ${GUI_APP_DATA_FOLDER}/.java
 mkdir -p ${GUI_APP_DATA_FOLDER}/.npm-packages
+mkdir -p ${GUI_APP_DATA_FOLDER}/.nuget
 mkdir -p ${GUI_APP_DATA_FOLDER}/go
 
 # Setup VSCode remote devel
@@ -99,6 +100,7 @@ docker run \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.m2",target="/root/.m2" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.java",target="/root/.java" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.npm-packages",target="/root/.npm-packages" \
+  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.nuget",target="/root/.nuget" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/go",target="/root/go" \
   --mount type=bind,source="${HOME}/projects",target="/root/projects" \
   --mount type=bind,source="${HOME}/libraries",target="/root/libraries" \
