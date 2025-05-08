@@ -48,6 +48,18 @@ RUN npm config set registry https://registry.npmmirror.com
 # (Optional) Install pnpm and TypeScript.
 RUN npm install -g pnpm typescript
 
+# Add user "aur" for AUR installation.
+RUN useradd -m -G wheel -s /bin/bash aur && \
+    echo 'aur:123456' | chpasswd && \
+    sed -i '/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /etc/sudoers
+
+# Install yay for AUR installation.
+RUN su aur -c 'cd /home/aur && \
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz && \
+    tar xf yay.tar.gz && \
+    cd yay && \
+    makepkg -si --noconfirm'
+
 # Set password for root user to "123456" for ssh remote login.
 RUN echo 'root:123456' | chpasswd
 

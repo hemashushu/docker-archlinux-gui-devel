@@ -1,5 +1,49 @@
 #!/usr/bin/env bash
 
+# Setup Wayland
+# -------------
+#
+# Docker args:
+#     -e XDG_RUNTIME_DIR=/tmp \
+#     -e WAYLAND_DISPLAY=${WAYLAND_DISPLAY} \
+#     -v ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:/tmp/${WAYLAND_DISPLAY} \
+#
+# Refer:
+# - https://github.com/mviereck/x11docker/wiki/How-to-provide-Wayland-socket-to-docker-container
+
+# Setup GPU
+# ---------
+#
+# Docker args:
+#     --device /dev/dri \
+#
+# Refer:
+# - https://github.com/mviereck/x11docker/wiki/Hardware-acceleration
+
+# Setup PipeWire
+# --------------
+#
+# Docker args:
+#    -v ${XDG_RUNTIME_DIR}/pipewire-0:/tmp/pipewire-0 \
+#
+# Refer:
+# - https://github.com/mviereck/x11docker/wiki/Container-sound:-ALSA-or-Pulseaudio
+# - https://stackoverflow.com/questions/28985714/run-apps-using-audio-in-a-docker-container/75775875#75775875
+
+# Setup X11 (optional)
+# --------------------
+#
+# Docker args:
+#     -v ${X11SOCKET_FOLDER}:${X11SOCKET_FOLDER} \
+#     -v ${X11AUTHORITY_FILE}:${X11AUTHORITY_FILE} \
+#     -e X11AUTHORITY_FILEORITY=${X11AUTHORITY_FILE} \
+#     -e DISPLAY=${DISPLAY}
+#
+# Refer:
+# - https://github.com/mviereck/x11docker/wiki/Short-setups-to-provide-X-display-to-container
+# - https://github.com/mviereck/x11docker/wiki/X-authentication-with-cookies-and-xhost-(%22No-protocol-specified%22-error)
+# - https://stackoverflow.com/questions/72081697/how-can-i-run-firefox-from-within-a-docker-container
+
 export X11SOCKET_FOLDER=/tmp/.X11-unix
 
 # Create XAuthority file for container
@@ -26,12 +70,9 @@ mkdir -p ${GUI_APP_DATA_FOLDER}/.cache
 mkdir -p ${GUI_APP_DATA_FOLDER}/.rustup
 mkdir -p ${GUI_APP_DATA_FOLDER}/.cargo
 mkdir -p ${GUI_APP_DATA_FOLDER}/.m2
+mkdir -p ${GUI_APP_DATA_FOLDER}/.java
 mkdir -p ${GUI_APP_DATA_FOLDER}/.npm-packages
 mkdir -p ${GUI_APP_DATA_FOLDER}/go
-
-# VSCode data folder
-# ------------------
-mkdir -p ${GUI_APP_DATA_FOLDER}/.vscode-oss
 
 # Setup VSCode remote devel
 # -------------------------
@@ -45,7 +86,7 @@ mkdir -p ${GUI_APP_DATA_FOLDER}/.vscode-server
 # - ~/libraries
 
 docker run \
-  -t \
+  -it \
   --rm \
   --mount type=bind,source="${HOME}/Downloads",target="/root/Downloads" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.ssh",target="/root/.ssh" \
@@ -56,9 +97,9 @@ docker run \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.rustup",target="/root/.rustup" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.cargo",target="/root/.cargo" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.m2",target="/root/.m2" \
+  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.java",target="/root/.java" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.npm-packages",target="/root/.npm-packages" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/go",target="/root/go" \
-  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.vscode-oss",target="/root/.vscode-oss" \
   --mount type=bind,source="${HOME}/projects",target="/root/projects" \
   --mount type=bind,source="${HOME}/libraries",target="/root/libraries" \
   --mount type=bind,source="${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}",target="/tmp/$WAYLAND_DISPLAY" \
@@ -80,4 +121,4 @@ docker run \
   --device /dev/snd \
   --network host \
   --cap-add=NET_RAW \
-  archlinux-gui-vscode-oss:1.3.0
+  archlinux-gui-clion:1.3.0

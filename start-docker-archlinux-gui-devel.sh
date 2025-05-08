@@ -119,4 +119,4 @@ docker run \
   --device /dev/snd \
   --network host \
   --cap-add=NET_RAW \
-  archlinux-gui-devel:1.2.0
+  archlinux-gui-devel:1.3.0

@@ -31,7 +31,7 @@ mkdir -p ${GUI_APP_DATA_FOLDER}/go
 
 # VSCode data folder
 # ------------------
-mkdir -p ${GUI_APP_DATA_FOLDER}/.vscode-oss
+mkdir -p ${GUI_APP_DATA_FOLDER}/.vscode
 
 # Setup VSCode remote devel
 # -------------------------
@@ -58,7 +58,7 @@ docker run \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.m2",target="/root/.m2" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.npm-packages",target="/root/.npm-packages" \
   --mount type=bind,source="${GUI_APP_DATA_FOLDER}/go",target="/root/go" \
-  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.vscode-oss",target="/root/.vscode-oss" \
+  --mount type=bind,source="${GUI_APP_DATA_FOLDER}/.vscode",target="/root/.vscode" \
   --mount type=bind,source="${HOME}/projects",target="/root/projects" \
   --mount type=bind,source="${HOME}/libraries",target="/root/libraries" \
   --mount type=bind,source="${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}",target="/tmp/$WAYLAND_DISPLAY" \
@@ -80,4 +80,4 @@ docker run \
   --device /dev/snd \
   --network host \
   --cap-add=NET_RAW \
-  archlinux-gui-vscode-oss:1.3.0
+  archlinux-gui-vscode:1.3.0

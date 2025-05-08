@@ -1,15 +1,21 @@
-FROM archlinux-gui-devel:1.2.0
+FROM archlinux-gui-devel:1.3.0
 
 # Update repository and system.
 RUN pacman -Syu --noconfirm
 
-# Install Monospace fonts and VSCode.
-RUN pacman -S ttf-jetbrains-mono ttf-0xproto-nerd code --noconfirm
+# Install Monospace fonts.
+RUN pacman -S ttf-jetbrains-mono ttf-0xproto-nerd --noconfirm
 
-COPY asset/start-and-wait-vscode.sh /root/start-and-wait-vscode.sh
+# Install VSCode OSS.
+RUN pacman -S --noconfirm code
+
+# Create a shell script to start and wait for VSCode
+RUN echo '#!/bin/bash' > /root/start-and-wait-vscode.sh && \
+    echo 'dbus-run-session code --no-sandbox --user-data-dir "/root/.config/Code - OSS"' >> /root/start-and-wait-vscode.sh && \
+    echo 'while ! pgrep -x "code-oss" > /dev/null; do sleep 1; done' >> /root/start-and-wait-vscode.sh && \
+    echo 'while pgrep -x code-oss > /dev/null; do sleep 1; done' >> /root/start-and-wait-vscode.sh
 
 RUN chmod +x /root/start-and-wait-vscode.sh
 
 # Start vscode
-# CMD dbus-run-session code --no-sandbox
 CMD /root/start-and-wait-vscode.sh
