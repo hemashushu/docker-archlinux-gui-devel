@@ -30,16 +30,18 @@ Installing VSCode can be challenging on certain Linux distributions (e.g., NixOS
 
 This image builds upon the `archlinux-gui-devel` image by adding the CLion application. It serves as a demonstration, similar to the `archlinux-gui-vscode` image.
 
+## Related Repositories
+
+- [docker-archlinux-gui](https://github.com/hemashushu/docker-archlinux-gui)
+- [docker-archlinux-gui-devel](https://github.com/hemashushu/docker-archlinux-gui-devel)
+- [docker-ubuntu-gui-devel](https://github.com/hemashushu/docker-ubuntu-gui-devel)
+
 ## Available Images
+
+It's recommended to build the images from the Dockerfiles in this repository since the size of the images is large. However, if you prefer to use pre-built images, you can find them on Docker Hub:
 
 - [archlinux-gui](https://hub.docker.com/r/hemashushu/archlinux-gui)
 - [archlinux-gui-firefox](https://hub.docker.com/r/hemashushu/archlinux-gui-firefox)
 - [archlinux-gui-mpv](https://hub.docker.com/r/hemashushu/archlinux-gui-mpv)
 - [archlinux-gui-devel](https://hub.docker.com/r/hemashushu/archlinux-gui-devel)
 - [archlinux-gui-vscode-oss](https://hub.docker.com/r/hemashushu/archlinux-gui-vscode-oss)
-
-## Related Repositories
-
-- [docker-archlinux-gui](https://github.com/hemashushu/docker-archlinux-gui)
-- [docker-archlinux-gui-devel](https://github.com/hemashushu/docker-archlinux-gui-devel)
-- [docker-ubuntu-gui-devel](https://github.com/hemashushu/docker-ubuntu-gui-devel)
